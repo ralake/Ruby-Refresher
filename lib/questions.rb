@@ -76,10 +76,7 @@ def total_of_array(array)
 end
 
 def double_array(array)
-	# dont like this one
-	new_arr = array.dup
-	array.each { |element| new_arr << element}
-	new_arr
+	(array << array.dup).flatten
 end
 
 def turn_symbol_into_string(symbol)
@@ -123,45 +120,41 @@ def round_down_number(float)
 	float.floor
 end
 
-# take a date and format it like dd/mm/yyyy, so Halloween 2013
-# becomes 31/10/2013
 def format_date_nicely(date)
+	date.strftime('%d/%m/%Y')
 end
 
-# get the domain name *without* the .com part, from an email address
-# so alex@makersacademy.com becomes makersacademy
 def get_domain_name_from_email_address(email)
+	# couldnt figure out regex for this
+	email.split('@')[1].split('.com')[0]
 end
 
-# capitalize the first letter in each word of a string, 
-#  except 'a', 'and' and 'the'
-# *unless* they come at the start of the start of the string, e.g.
-# 'the lion the witch and the wardrobe' becomes
-# 'The Lion the Witch and the Wardrobe'
 def titleize_a_string(string)
+	# horrible
+	words_to_ignore = ['a', 'and', 'the']
+	words = string.split(' ').each { |word| word.capitalize! unless words_to_ignore.include?(word) }
+	words[0].capitalize!
+	words.join(' ')
 end
 
-# return true if a string contains any special characters
-# where 'special character' means anything apart from the letters
-# a-z (uppercase and lower) or numbers
-def check_a_string_for_special_characters(string)
-end
+# def check_a_string_for_special_characters(string)
+# 	# This works in irb = worked out using rubular!
+# 	# /\W/ == string
+# end
 
-# get the upper limit of a range. e.g. for the range 1..20, you
-# should return 20
 def get_upper_limit_of(range)
+	range.last
 end
 
-# should return true for a 3 dot range like 1...20, false for a 
-# normal 2 dot range
 def is_a_3_dot_range?(range)
+	# this works but doesnt pass test
+	range.max != range.last
 end
 
-# get the square root of a number
 def square_root_of(number)
+	Math.sqrt(number)
 end
 
-# count the number of words in a file
 def word_count_a_file(file_path)
 end
 
