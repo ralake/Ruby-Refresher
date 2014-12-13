@@ -137,17 +137,15 @@ def titleize_a_string(string)
 	words.join(' ')
 end
 
-# def check_a_string_for_special_characters(string)
-# 	# This works in irb = worked out using rubular!
-# 	# /\W/ == string
-# end
+def check_a_string_for_special_characters(string)
+	/\W/ === string
+end
 
 def get_upper_limit_of(range)
 	range.last
 end
 
 def is_a_3_dot_range?(range)
-	# this works but doesnt pass test
 	range.max != range.last
 end
 
@@ -156,6 +154,10 @@ def square_root_of(number)
 end
 
 def word_count_a_file(file_path)
+	file = File.open(file_path, 'r')
+	word_count = 0
+	file.each_line { |line| word_count += (line.split).length }
+	word_count
 end
 
 # --- tougher ones ---
