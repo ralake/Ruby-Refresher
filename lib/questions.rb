@@ -82,27 +82,20 @@ def double_array(array)
 	new_arr
 end
 
-# convert a symbol into a string
 def turn_symbol_into_string(symbol)
 	symbol.to_s
 end
 
-# get the average from an array, rounded to the nearest integer
-# so [10, 15, 25] should return 33
 def average_of_array(array)
+	(array.inject(:+).to_f / array.length).round
 end
 
-# get all the elements in an array, up until the first element
-# which is greater than five. e.g.
-# [1, 3, 5, 4, 1, 2, 6, 2, 1, 3, 7]
-# becomes [1, 3, 5, 4, 1, 2]
 def get_elements_until_greater_than_five(array)
+	array.take_while { |num| num < 6 }
 end
 
-# turn an array (with an even number of elements) into a hash, by
-# pairing up elements. e.g. ['a', 'b', 'c', 'd'] becomes
-# {'a' => 'b', 'c' => 'd'}
 def convert_array_to_a_hash(array)
+	array.each_slice(2).to_a.to_h
 end
 
 # get all the letters used in an array of words and return
