@@ -35,15 +35,19 @@ end
 # discard the first 3 elements of an array, 
 # e.g. [1, 2, 3, 4, 5, 6] becomes [4, 5, 6]
 def all_elements_except_first_3(array)
+	array.drop(3)
 end
 
 # add an element to the beginning of an array
 def add_element_to_beginning_of_array(array, element)
+	array.unshift(element)
 end
 
 # sort an array of words by their last letter, e.g.
 # ['sky', 'puma', 'maker'] becomes ['puma', 'maker', 'sky']
 def array_sort_by_last_letter_of_word(array)
+	(array.each { |word| word.reverse! }).sort!.each { |word| word.reverse! }
+	# x.each { |word| word.reverse! }
 end
 
 # cut strings in half, and return the first half, e.g.
