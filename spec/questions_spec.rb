@@ -170,9 +170,8 @@ describe 'the Friday test :)' do
     a = check_a_string_for_special_characters 'ABCdef123'
     b = check_a_string_for_special_characters 'ABC@def123!'
 
-    # changed test syntax as Rspec has changed be_true to be_truthy etc.
-    expect(a).to be_falsey
-    expect(b).to be_truthy
+    expect(a).to be false
+    expect(b).to be true
   end
 
   it 'get_upper_limit_of' do
@@ -184,9 +183,8 @@ describe 'the Friday test :)' do
     a = is_a_3_dot_range? 1..20
     b = is_a_3_dot_range? 1...20
 
-    # changed test syntax as Rspec has changed be_true to be_truthy etc.
-    expect(a).to be_falsey
-    expect(b).to be_truthy
+    expect(a).to be false
+    expect(b).to be true
   end
 
   it 'square_root_of' do
@@ -201,9 +199,9 @@ describe 'the Friday test :)' do
     expect(n).to eq 70
   end
 
-#   it 'call_method_from_string' do
-#     expect { call_method_from_string('foobar') }.to raise_error(NameError)
-#   end
+  it 'call_method_from_string' do
+    expect { call_method_from_string('foobar') }.to raise_error(NameError)
+  end
 
 #   it 'is_a_2014_bank_holiday?' do
 #     a = is_a_2014_bank_holiday?(Time.new(2014, 8, 25))
@@ -218,8 +216,8 @@ describe 'the Friday test :)' do
 #     expect(n).to eq 2016
 #   end
 
-#   it 'count_words_of_each_length_in_a_file' do
-#     n = count_words_of_each_length_in_a_file('lorem.txt') || []
-#     expect(Hash[n.sort]).to eq({1=>1, 2=>5, 3=>7, 4=>12, 5=>14, 6=>4, 7=>8, 8=>6, 9=>6, 10=>2, 11=>2, 12=>3}) 
-#   end
+  it 'count_words_of_each_length_in_a_file' do
+    n = count_words_of_each_length_in_a_file('data/lorem.txt') || []
+    expect(Hash[n.sort]).to eq({1=>1, 2=>5, 3=>7, 4=>12, 5=>14, 6=>4, 7=>8, 8=>6, 9=>6, 10=>2, 11=>2, 12=>3}) 
+  end
 end

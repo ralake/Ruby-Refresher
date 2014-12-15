@@ -31,8 +31,7 @@ def add_element_to_beginning_of_array(array, element)
 end
 
 def array_sort_by_last_letter_of_word(array)
-	# dont like this one
-	(array.each { |word| word.reverse! }).sort!.each { |word| word.reverse! }
+	array.sort_by { |word| word[-1] }
 end
 
 def get_first_half_of_string(string)
@@ -40,19 +39,11 @@ def get_first_half_of_string(string)
 end
 
 def make_numbers_negative(number)
-	# dont like this one
-	if number < 0
-		number
-	else
-		number * -1
-	end
+	number > 0 ? number * -1 : number
 end
 
 def separate_array_into_even_and_odd_numbers(array)
-	# dont like this one
-	new_array = []
-	new_array << array.select { |num| num.even? }
-	new_array << array.select { |num| num.odd? }
+	array.partition(&:even?)
 end
 
 def number_of_elements_that_are_palindromes(array)
@@ -104,7 +95,6 @@ def swap_keys_and_values_in_a_hash(hash)
 end
 
 def add_together_keys_and_values(hash)
-	# weird looking! Must be a more ruby way...
 	hash.inject(:+).inject(:+)
 end
 
@@ -125,14 +115,11 @@ def format_date_nicely(date)
 end
 
 def get_domain_name_from_email_address(email)
-	# couldnt figure out regex for this
 	email.split('@')[1].split('.com')[0]
 end
 
 def titleize_a_string(string)
-	# horrible
-	words_to_ignore = ['a', 'and', 'the']
-	words = string.split(' ').each { |word| word.capitalize! unless words_to_ignore.include?(word) }
+	words = string.split(' ').each { |word| word.capitalize! unless ['a', 'and', 'the'].include?(word) }
 	words[0].capitalize!
 	words.join(' ')
 end
@@ -160,12 +147,8 @@ def word_count_a_file(file_path)
 	word_count
 end
 
-# --- tougher ones ---
-
-# call an arbitrary method from a string. so if I
-# called call_method_from_string('foobar')
-# the method foobar should be invoked
 def call_method_from_string(str_method)
+	send(str_method)
 end
 
 # return true if the date is a uk bank holiday for 2014
@@ -181,12 +164,18 @@ end
 def your_birthday_is_on_a_friday_in_the_year(birthday)
 end
 
-# in a file, total the number of times words of different lengths
-# appear. So in a file with the text "the cat sat on the blue mat"
-# I have 5 words which are 3 letters long, 1 which is 2 letters long
-# and 1 that is 4 letters long. Return it as a hash in the format
-# word_length => count, e.g. {2 => 1, 3 => 5, 4 => 1}
 def count_words_of_each_length_in_a_file(file_path)
+	file = File.open(file_path, 'r')
+	words = file.read.split(' ').map { |word| word.gsub(/\W/, '') }
+	counter = Hash.new
+	words.each do |word|
+		if counter.has_key?(word.length)
+			counter[word.length] += 1
+		else
+			counter[word.length] = 1
+		end
+	end	
+	counter
 end
 
 # implement fizzbuzz without modulo, i.e. the % method
