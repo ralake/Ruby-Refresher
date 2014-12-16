@@ -1,3 +1,5 @@
+require 'date'
+
 def select_elements_starting_with_a(array)
 	array.select { |word| /\ba\w+/.match(word) }
 end
@@ -151,17 +153,16 @@ def call_method_from_string(str_method)
 	send(str_method)
 end
 
-# return true if the date is a uk bank holiday for 2014
-# the list of bank holidays is here:
-# https://www.gov.uk/bank-holidays
 def is_a_2014_bank_holiday?(date)
+	[Time.new(2014, 1, 1), Time.new(2014, 4, 18),
+	Time.new(2014, 4, 21), Time.new(2014, 5, 5),
+	Time.new(2014, 5, 26), Time.new(2014, 8, 25),
+	Time.new(2014, 12, 25), Time.new(2014, 12, 26)].any? { |bank_hol| bank_hol == date }
 end
 
-# given your birthday this year, this method tells you
-# the next year when your birthday will fall on a friday
-# e.g. january 1st, will next be a friday in 2016
-# return the day as a capitalized string like 'Friday'
 def your_birthday_is_on_a_friday_in_the_year(birthday)
+	birthday = birthday.to_date.next_year until birthday.friday?
+  birthday.year
 end
 
 def count_words_of_each_length_in_a_file(file_path)
